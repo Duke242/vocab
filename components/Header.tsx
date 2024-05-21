@@ -1,47 +1,43 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import type { JSX } from "react";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import ButtonSignin from "./ButtonSignin";
-import logo from "@/app/icon.png";
-import config from "@/config";
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
+import Link from "next/link"
+import Image from "next/image"
+import ButtonSignin from "./ButtonSignin"
+import logo from "@/app/icon.png"
+import config from "@/config"
 
-const links: {
-  href: string;
-  label: string;
-}[] = [
+const links = [
   {
     href: "/#pricing",
     label: "Pricing",
   },
-  {
-    href: "/#testimonials",
-    label: "Reviews",
-  },
+  // {
+  //   href: "/#testimonials",
+  //   label: "Reviews",
+  // },
   {
     href: "/#faq",
     label: "FAQ",
   },
-];
+]
 
-const cta: JSX.Element = <ButtonSignin extraStyle="btn-primary" />;
+const cta = <ButtonSignin extraStyle="btn bg-[#87D8F5] hover:bg-[#2fbbee]" />
 
 // A header with a logo on the left, links in the center (like Pricing, etc...), and a CTA (like Get Started or Login) on the right.
 // The header is responsive, and on mobile, the links are hidden behind a burger button.
 const Header = () => {
-  const searchParams = useSearchParams();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const searchParams = useSearchParams()
+  const [isOpen, setIsOpen] = useState(false)
 
   // setIsOpen(false) when the route changes (i.e: when the user clicks on a link on mobile)
   useEffect(() => {
-    setIsOpen(false);
-  }, [searchParams]);
+    setIsOpen(false)
+  }, [searchParams])
 
   return (
-    <header className="bg-base-200">
+    <header className="bg-white">
       <nav
         className="container flex items-center justify-between px-8 py-4 mx-auto"
         aria-label="Global"
@@ -51,7 +47,7 @@ const Header = () => {
           <Link
             className="flex items-center gap-2 shrink-0 "
             href="/"
-            title={`${config.appName} homepage`}
+            title={`${config.appName} hompage`}
           >
             <Image
               src={logo}
@@ -96,7 +92,7 @@ const Header = () => {
             <Link
               href={link.href}
               key={link.href}
-              className="link link-hover"
+              className="hover:bg-gray-200 p-3 transition rounded"
               title={link.label}
             >
               {link.label}
@@ -117,7 +113,7 @@ const Header = () => {
           <div className="flex items-center justify-between">
             <Link
               className="flex items-center gap-2 shrink-0 "
-              title={`${config.appName} homepage`}
+              title={`${config.appName} hompage`}
               href="/"
             >
               <Image
@@ -177,7 +173,7 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
