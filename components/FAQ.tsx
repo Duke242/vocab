@@ -15,7 +15,8 @@ const faqList: Item[] = [
     question: "What do I get exactly?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        A tool to help you improve your writing.
+        Your personal vocabulary assistant. Discover new words and their
+        definitions effortlessly.
       </div>
     ),
   },
@@ -25,7 +26,7 @@ const faqList: Item[] = [
   },
   {
     question: "Contact?",
-    answer: <p>Contact us at wriiter_co@proton.me</p>,
+    answer: <p>Contact us at https://x.com/_Moe3301</p>,
   },
 ]
 

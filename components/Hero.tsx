@@ -5,10 +5,10 @@ const Hero = () => {
     <section className="max-w-7xl mx-auto bg-base-100 flex flex-col lg:flex-col items-center justify-center gap-16 lg:gap-20 px-8 py-8 lg:py-20">
       <div className="text-center">
         <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 bg-[#87D8F5] pb-4">
-          Level Up Your Writing with AI
+          Jot down unfamiliar words to learn.
         </h1>
         <p className="text-2xl text-gray-500">
-          Struggling with messy writing? Let AI review and improve your writing.
+          Struggling to Recall Word Meanings? Let's Fix That!{" "}
         </p>
       </div>
       <div className="w-1/2 h-64 relative">

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { getSEOTags } from "@/libs/seo";
-import config from "@/config";
+import Link from "next/link"
+import { getSEOTags } from "@/libs/seo"
+import config from "@/config"
 
 // CHATGPT PROMPT TO GENERATE YOUR TERMS & SERVICES — replace with your own data 👇
 
@@ -28,7 +28,7 @@ import config from "@/config";
 export const metadata = getSEOTags({
   title: `Terms and Conditions | ${config.appName}`,
   canonicalUrlRelative: "/tos",
-});
+})
 
 const TOS = () => {
   return (
@@ -57,43 +57,47 @@ const TOS = () => {
           className="leading-relaxed whitespace-pre-wrap"
           style={{ fontFamily: "sans-serif" }}
         >
-          {`Last Updated: September 26, 2023
+          {`
 
-Welcome to ShipFast!
+**Terms of Service**
 
-These Terms of Service ("Terms") govern your use of the ShipFast website at https://shipfa.st ("Website") and the services provided by ShipFast. By using our Website and services, you agree to these Terms.
+Date: May 22, 2024
 
-1. Description of ShipFast
+Welcome to Vocablist!
 
-ShipFast is a platform that offers a JavaScript code boilerplate to assist entrepreneurs in launching their startups more efficiently.
+These Terms of Service ("Terms") govern your access to and use of Vocablist.co (the "Website") and the services provided therein (the "Services"), so please read them carefully.
 
-2. Ownership and Usage Rights
+By accessing or using the Website or Services, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Website or Services.
 
-When you purchase a package from ShipFast, you gain the right to download and use the code provided for creating applications. You own the code you create but do not have the right to resell it. We offer a full refund within 7 days of purchase, as specified in our refund policy.
+**1. Ownership and Usage**
 
-3. User Data and Privacy
+When purchasing a package from Vocablist, users gain access to code for creating apps. Users own the code but are not permitted to resell it. A full refund may be requested within 7 days of purchase.
 
-We collect and store user data, including name, email, and payment information, as necessary to provide our services. For details on how we handle your data, please refer to our Privacy Policy at https://shipfa.st/privacy-policy.
+**2. User Data Collection**
 
-4. Non-Personal Data Collection
+We collect and store personal data including name, email, and payment information in accordance with our Privacy Policy.
 
-We use web cookies to collect non-personal data for the purpose of improving our services and user experience.
+**3. Non-Personal Data Collection**
 
-5. Governing Law
+We utilize web cookies for non-personal data collection. For more information, please refer to our Privacy Policy.
 
-These Terms are governed by the laws of France.
+**4. Governing Law**
 
-6. Updates to the Terms
+These Terms are governed by the laws of the United States of America.
 
-We may update these Terms from time to time. Users will be notified of any changes via email.
+**5. Updates to the Terms**
 
-For any questions or concerns regarding these Terms of Service, please contact us at marc@shipfa.st.
+Users will be notified of any updates to these Terms via email.
 
-Thank you for using ShipFast!`}
+By using Vocablist, you agree to abide by these Terms. For any questions or concerns, please reach out to us on X (https://x.com/_Moe3301).
+
+For more information on how we handle your data, please review our Privacy Policy at [https://vocablist.co/privacy-policy](https://vocablist.co/privacy-policy).
+
+Thank you for using Vocablist!`}
         </pre>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default TOS;
+export default TOS
