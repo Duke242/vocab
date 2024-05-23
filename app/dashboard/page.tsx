@@ -1,6 +1,9 @@
 import ButtonAccount from "@/components/ButtonAccount"
 import WordInput from "@/components/WordInput"
 import WordsList from "@/components/WordsList" // Import the WordsList component
+import Image from "next/image"
+import logo from "@/app/icon.png"
+import config from "@/config"
 
 export const dynamic = "force-dynamic"
 
@@ -18,7 +21,13 @@ export default async function Dashboard() {
   //   console.error("Error fetching words:", error.message)
   // }
 
-  const mockWords = [
+  interface Word {
+    id: string
+    word: string
+    definition: string
+  }
+
+  const mockWords: Word[] = [
     {
       id: "1",
       word: "React",
@@ -75,10 +84,10 @@ export default async function Dashboard() {
         "JavaScript Object Notation, a lightweight data-interchange format.",
     },
   ]
-
+  const mock: Word[] = []
   return (
-    <main className="min-h-screen p-8 pb-24">
-      <header className="max-w-xl mr-auto space-y-8">
+    <main className="min-h-screen p-8 pb-24 bg-base-100">
+      <header className="max-w-xl mr-auto space-y-8 flex align-center">
         <ButtonAccount />
       </header>
       <section>

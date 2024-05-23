@@ -7,12 +7,8 @@ const WordInput = () => {
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
-    e.preventDefault() // Prevent default form submission behavior
-
-    // Handle the submission of the new word
+    e.preventDefault()
     console.log("New word:", newWord)
-
-    // Reset the input field
     setNewWord("")
   }
 
@@ -24,12 +20,14 @@ const WordInput = () => {
           value={newWord}
           onChange={(e) => setNewWord(e.target.value)}
           placeholder="Enter a new word"
-          className="w-full max-w-md p-2 border border-gray-300 rounded"
+          className="w-full max-w-lg px-4 py-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-lg focus:shadow-lg" // Adjusted padding and font size
+          required
+          minLength={3}
+          maxLength={30}
         />
         <button
           type="submit"
-          onClick={handleSubmit}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          className="mt-4 px-4 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none transition hover:scale-105 mb-6 md:mb-0"
         >
           Add Word
         </button>
