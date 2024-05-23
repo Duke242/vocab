@@ -8,7 +8,7 @@ const Hero = () => {
           Jot down unfamiliar words to learn.
         </h1>
         <p className="text-2xl text-gray-500">
-          Struggling to Recall Word Meanings? Let's Fix That!{" "}
+          Struggling to Recall Word Meanings? Let&apos;s Fix That!
         </p>
       </div>
       <div className="w-1/2 h-64 relative">

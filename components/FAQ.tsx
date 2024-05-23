@@ -1,16 +1,16 @@
 "use client"
 
-import { useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 
 // <FAQ> component is a lsit of <Item> component
 // Just import the FAQ & add your FAQ content to the const faqList
 
-interface Item {
+interface Items {
   question: string
-  answer: JSX.Element
+  answer: React.JSX.Element
 }
 
-const faqList: Item[] = [
+const faqList: Items[] = [
   {
     question: "What do I get exactly?",
     answer: (
@@ -26,11 +26,21 @@ const faqList: Item[] = [
   },
   {
     question: "Contact?",
-    answer: <p>Contact us at https://x.com/_Moe3301</p>,
+    answer: (
+      <p>
+        Contact us at{" "}
+        <a
+          className="text-blue-500 hover:underline"
+          href="https://x.com/_Moe3301"
+        >
+          https://x.com/_Moe3301
+        </a>
+      </p>
+    ),
   },
 ]
 
-const Item = ({ item }: { item: Item }) => {
+const Item = ({ item }: { item: Items }) => {
   const accordion = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
 
