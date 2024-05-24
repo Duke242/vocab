@@ -20,6 +20,12 @@ export async function addWord(word: string, definition: string) {
       { word: word, definition: definition, creator_id: session.user.id },
     ])
     .select()
+
+  if (error) {
+    throw new Error(`Failed to add word: ${error.message}`)
+  }
+
+  return data ? data[0].id : null // Return the ID of the newly created word entry
 }
 
 export async function deleteWord(wordId: string) {

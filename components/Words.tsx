@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { deleteWord, addWord } from "@/libs/serverActions"
 import toast from "react-hot-toast"
+import { TiDelete } from "react-icons/ti"
 
 interface Word {
   id: string
@@ -17,23 +18,22 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
   const [words, setWords] = useState<Word[]>(initialWords)
   const [newWord, setNewWord] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
-  const handleDeleteWord = (id: string) => {
-    // Optimistically remove the word from the UI
-    const updatedWords = words.filter((word) => word.id !== id)
-    setWords(updatedWords)
+  const handleDeleteWord = async (id: string) => {
+    setIsDeleting(true)
 
-    // Asynchronously delete the word from the server
-    deleteWord(id)
-      .then(() => {
-        // Success
-        toast.error("Word deleted successfully.")
-      })
-      .catch((error) => {
-        // If there's an error, revert the UI to the previous state
-        console.error("Error deleting word:", error)
-        setWords(initialWords)
-      })
+    try {
+      await deleteWord(id)
+      const updatedWords = words.filter((word) => word.id !== id)
+      setWords(updatedWords)
+      toast.error("Word deleted successfully.")
+    } catch (error) {
+      console.error("Error deleting word:", error)
+      setWords(initialWords)
+    } finally {
+      setIsDeleting(false)
+    }
   }
 
   const handleSubmit = async (
@@ -55,17 +55,26 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
         const data = await res.json()
         const definitionString = data.definition
 
+        const capitalize = (str: string) => {
+          if (!str) return str
+          return str.charAt(0).toUpperCase() + str.slice(1)
+        }
+
+        const capitalizedWord = capitalize(newWord)
+
+        const newWordId = await addWord(capitalizedWord, definitionString)
+
         const updatedWords = [
           ...words,
           {
-            id: Date.now().toString(),
-            word: newWord,
+            id: newWordId,
+            word: capitalizedWord,
             definition: definitionString,
           },
         ]
+
         setWords(updatedWords)
-        addWord(newWord, definitionString)
-        toast.success("Word added successfully")
+        toast.success(`Word added successfully.`)
         setNewWord("")
       } else {
         console.error("Error:", res.statusText)
@@ -85,7 +94,7 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
         handleSubmit={handleSubmit}
         isLoading={isLoading}
       />
-      <h2 className="text-2xl font-bold mb-4">My Words</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-600">My Words</h2>
 
       {words.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -95,15 +104,16 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
               className="bg-white p-4 flex flex-col justify-between border-b border-gray-300"
             >
               <div>
+                <button
+                  className="flex ml-auto hover:scale-110 transition"
+                  onClick={() => handleDeleteWord(word.id)}
+                  disabled={isDeleting}
+                >
+                  <TiDelete size={30} color="ff6e6b" />
+                </button>
                 <h3 className="text-lg font-semibold">{word.word}</h3>
                 <p className="text-gray-500">{word.definition}</p>
               </div>
-              <button
-                className="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded w-fit"
-                onClick={() => handleDeleteWord(word.id)}
-              >
-                Delete
-              </button>
             </div>
           ))}
         </div>
