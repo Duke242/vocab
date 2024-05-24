@@ -1,6 +1,4 @@
 import ButtonAccount from "@/components/ButtonAccount"
-import WordInput from "@/components/WordInput"
-import WordsList from "@/components/WordsList" // Import the WordsList component
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
 import { cookies } from "next/headers"
 import Words from "@/components/Words"
