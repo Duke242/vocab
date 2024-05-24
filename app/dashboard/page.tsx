@@ -1,9 +1,8 @@
 import ButtonAccount from "@/components/ButtonAccount"
 import WordInput from "@/components/WordInput"
 import WordsList from "@/components/WordsList" // Import the WordsList component
-import Image from "next/image"
-import logo from "@/app/icon.png"
-import config from "@/config"
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
 
 export const dynamic = "force-dynamic"
 
@@ -11,15 +10,20 @@ export const dynamic = "force-dynamic"
 // It's a server component which means you can fetch data (like the user profile) before the page is rendered.
 // See https://shipfa.st/docs/tutorials/private-page
 export default async function Dashboard() {
-  // const user = await supabase.auth.getUser()
-  // const { data: words, error } = await supabase
-  //   .from("words")
-  //   .select("*")
-  //   .eq("user_id", user.data.user.id)
+  const supabase = createServerComponentClient({ cookies })
 
-  // if (error) {
-  //   console.error("Error fetching words:", error.message)
-  // }
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  const { data: words, error } = await supabase
+    .from("words")
+    .select("*")
+    .eq("creator_id", session.user.id)
+
+  if (error) {
+    console.error("Error fetching words:", error.message)
+  }
 
   interface Word {
     id: string
@@ -84,7 +88,7 @@ export default async function Dashboard() {
         "JavaScript Object Notation, a lightweight data-interchange format.",
     },
   ]
-  const mock: Word[] = []
+
   return (
     <main className="min-h-screen p-8 pb-24 bg-base-100">
       <header className="max-w-xl mr-auto space-y-8 flex align-center">

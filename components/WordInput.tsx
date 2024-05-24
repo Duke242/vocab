@@ -3,13 +3,31 @@ import React, { useState } from "react"
 
 const WordInput = () => {
   const [newWord, setNewWord] = useState("")
+  const [response, setResponse] = useState("")
 
-  const handleSubmit = (
+  const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault()
-    console.log("New word:", newWord)
-    setNewWord("")
+
+    try {
+      const res = await fetch("/api/openai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ word: newWord }),
+      })
+
+      if (res.ok) {
+        const data = await res.json()
+        setResponse(data.message) // Assuming the response contains a "message" field
+      } else {
+        console.error("Error:", res.statusText)
+      }
+    } catch (error) {
+      console.error("Error:", error)
+    }
   }
 
   return (
@@ -32,6 +50,7 @@ const WordInput = () => {
           Add Word
         </button>
       </form>
+      {response && <p className="mt-4 text-lg">{response}</p>}
     </section>
   )
 }

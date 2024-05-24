@@ -113,7 +113,7 @@ export default function Login() {
               />
             </svg>
           )}
-          Sign-up with Google
+          Sign-in with Google
         </button>
       </div>
     </main>
