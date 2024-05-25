@@ -7,6 +7,7 @@ import ClientLayout from "@/components/LayoutClient"
 import config from "@/config"
 import "./globals.css"
 import { Suspense } from "react"
+import { Analytics } from "@vercel/analytics/react"
 
 const font = Inter({ subsets: ["latin"] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </head>
       )}
       <body>
+        <Analytics />
         {/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
         <Suspense>
           <ClientLayout>{children}</ClientLayout>
