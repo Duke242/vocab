@@ -109,7 +109,11 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
                   onClick={() => handleDeleteWord(word.id)}
                   disabled={isDeleting}
                 >
-                  <TiDelete size={30} color="ff6e6b" />
+                  {isDeleting ? (
+                    <span className="loading-spinner loading loading-xs"></span>
+                  ) : (
+                    <TiDelete size={30} color="ff6e6b" />
+                  )}
                 </button>
                 <h3 className="text-lg font-semibold">{word.word}</h3>
                 <p className="text-gray-500">{word.definition}</p>
