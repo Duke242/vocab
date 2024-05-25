@@ -24,7 +24,7 @@ const config = {
         //  REQUIRED - Name of the plan, displayed on the pricing page
         name: "Starter",
         // A friendly description of the plan, displayed on the pricing page. Tip: explain why this plan and not others
-        description: "Perfect for small projects",
+        // description: "Perfect for small projects",
         // The price you want to display, the one user will be charged on Stripe.
         price: 4,
         // If you have an anchor price (i.e. $29) that you want to display crossed out, put it here. Otherwise, leave it empty
