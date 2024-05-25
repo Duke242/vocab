@@ -18,10 +18,10 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
   const [words, setWords] = useState<Word[]>(initialWords)
   const [newWord, setNewWord] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const [deletingWordId, setDeletingWordId] = useState<string | null>(null)
 
   const handleDeleteWord = async (id: string) => {
-    setIsDeleting(true)
+    setDeletingWordId(id)
 
     try {
       await deleteWord(id)
@@ -32,7 +32,7 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
       console.error("Error deleting word:", error)
       setWords(initialWords)
     } finally {
-      setIsDeleting(false)
+      setDeletingWordId(null)
     }
   }
 
@@ -107,9 +107,9 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
                 <button
                   className="flex ml-auto hover:scale-110 transition"
                   onClick={() => handleDeleteWord(word.id)}
-                  disabled={isDeleting}
+                  disabled={deletingWordId === word.id}
                 >
-                  {isDeleting ? (
+                  {deletingWordId === word.id ? (
                     <span className="loading-spinner loading loading-xs"></span>
                   ) : (
                     <TiDelete size={30} color="ff6e6b" />
