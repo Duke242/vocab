@@ -98,7 +98,7 @@ const Words: React.FC<WordsListProps> = ({ words: initialWords }) => {
 
       {words.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {words.map((word) => (
+          {[...words].reverse().map((word) => (
             <div
               key={word.id}
               className="bg-white p-4 flex flex-col justify-between border-b border-gray-300"
